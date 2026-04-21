@@ -9,391 +9,263 @@
 <meta property="og:description" content="Tecnología e IA para que tu iglesia llegue a más personas.">
 <meta property="og:type" content="website">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+@font-face{font-family:'FG';src:url('fonts/FoundersGrotesk-Regular.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'FG';src:url('fonts/FoundersGrotesk-RegularItalic.otf') format('opentype');font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:'FG';src:url('fonts/FoundersGrotesk-Medium.otf') format('opentype');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'FG';src:url('fonts/FoundersGrotesk-Semibold.otf') format('opentype');font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:'FG';src:url('fonts/FoundersGrotesk-Bold.otf') format('opentype');font-weight:700;font-style:normal;font-display:swap}
 
 :root{
-  --navy:#0D1B2A;
-  --blue:#1A6FD4;
-  --teal:#00D4AA;
-  --ink:#0A1628;
-  --paper:#FFFFFF;
-  --gray:#F7F8FA;
-  --border:rgba(13,27,42,.08);
-  --muted:#5a6577;
+  --bg:#F7F8FA;
+  --surface:#FFFFFF;
+  --inverse:#0A1628;
+  --fg1:#0A1628;
+  --fg2:#22395B;
+  --accent:#5B2BE0;
+  --link:#2F63F8;
+  --muted:#7A94B8;
+  --border:#CED9E8;
+  --border-light:#E6ECF4;
+  --sand100:#EEF0F3;
 }
+
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{
-  font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;
-  color:var(--ink);
-  background:var(--paper);
-  line-height:1.6;
-  -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
+  font-family:'FG',system-ui,-apple-system,sans-serif;
+  color:var(--fg1);background:var(--bg);
+  line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden;
 }
-h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif;letter-spacing:-.02em;line-height:1.1;color:var(--ink)}
+h1,h2,h3,h4{font-family:'FG',sans-serif;line-height:1.05;letter-spacing:-.025em;color:var(--fg1)}
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 button{font:inherit;cursor:pointer;border:0;background:none}
 input{font:inherit}
+.container{max-width:1180px;margin:0 auto;padding:0 28px}
 
-.container{max-width:1200px;margin:0 auto;padding:0 24px}
-
-/* ===== NAVBAR ===== */
-.nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  padding:18px 0;transition:all .3s ease;
-  background:transparent;
-}
-.nav.scrolled{
-  background:rgba(255,255,255,.92);
-  backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
-  box-shadow:0 1px 0 var(--border);
-  padding:14px 0;
-}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:32px;position:relative}
-.logo{
-  font-family:'Space Grotesk',sans-serif;
-  font-weight:700;font-size:18px;letter-spacing:-.02em;
-  color:#fff;transition:color .3s;
-}
-.logo-dot{color:var(--teal)}
-.nav.scrolled .logo{color:var(--ink)}
-.nav-links{display:flex;gap:32px;align-items:center}
-.nav-links a.nav-link{
-  color:rgba(255,255,255,.85);font-size:15px;font-weight:500;
-  transition:color .2s;
-}
-.nav-links a.nav-link:hover{color:#fff}
-.nav.scrolled .nav-links a.nav-link{color:var(--muted)}
-.nav.scrolled .nav-links a.nav-link:hover{color:var(--ink)}
-
+/* ===== BUTTONS ===== */
 .btn{
   display:inline-flex;align-items:center;gap:8px;
-  padding:12px 20px;border-radius:10px;
-  font-weight:600;font-size:14px;
-  transition:all .2s;white-space:nowrap;
-  font-family:inherit;
+  padding:13px 24px;border-radius:999px;
+  font-size:15px;font-weight:600;letter-spacing:-.01em;
+  transition:all .2s ease;cursor:pointer;border:0;white-space:nowrap;
 }
-.btn-primary{background:var(--teal);color:var(--navy)}
-.btn-primary:hover{transform:translateY(-1px);box-shadow:0 10px 28px rgba(0,212,170,.4)}
-.btn-lg{padding:16px 28px;font-size:16px;border-radius:12px}
+.btn-primary{background:var(--inverse);color:#fff}
+.btn-primary:hover{background:#172B47;transform:translateY(-1px);box-shadow:0 8px 24px rgba(10,22,40,.18)}
+.btn-accent{background:var(--accent);color:#fff}
+.btn-accent:hover{background:#4920C4;transform:translateY(-1px);box-shadow:0 8px 24px rgba(91,43,224,.30)}
+.btn-outline{background:transparent;color:var(--fg1);border:1.5px solid var(--border)}
+.btn-outline:hover{border-color:var(--fg1)}
+.btn-ghost{background:transparent;color:var(--fg2);padding-left:0;padding-right:0}
+.btn-ghost:hover{color:var(--accent)}
+.btn-lg{padding:16px 30px;font-size:16px}
+.btn-sm{padding:9px 18px;font-size:14px}
 
-.hamburger{display:none;width:40px;height:40px;align-items:center;justify-content:center;color:#fff}
-.nav.scrolled .hamburger{color:var(--ink)}
-.hamburger svg{width:24px;height:24px}
+/* ===== NAVBAR ===== */
+.nav{position:fixed;top:20px;left:0;right:0;z-index:100;display:flex;justify-content:center;pointer-events:none}
+.nav-pill{
+  display:flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,.88);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border:1px solid var(--border);border-radius:999px;
+  padding:8px 8px 8px 22px;
+  box-shadow:0 2px 24px rgba(10,22,40,.09);
+  pointer-events:auto;
+}
+.logo{display:flex;align-items:center;gap:9px;font-size:15px;font-weight:600;color:var(--fg1);margin-right:10px;white-space:nowrap}
+.logo-mark{width:18px;height:18px;border-radius:4px;background:var(--accent);flex-shrink:0}
+.nav-links{display:flex;align-items:center;gap:2px}
+.nav-link{font-size:14px;font-weight:500;color:var(--fg2);padding:7px 13px;border-radius:999px;transition:color .15s,background .15s}
+.nav-link:hover{color:var(--fg1);background:var(--sand100)}
+.hamburger{display:none;align-items:center;justify-content:center;width:38px;height:38px;border-radius:10px;color:var(--fg1)}
+
+/* ===== SECTION BASE ===== */
+.section{padding:100px 0}
+.section-label{display:flex;align-items:baseline;gap:10px;margin-bottom:14px}
+.section-num{font-size:12px;font-weight:600;color:var(--muted);letter-spacing:.04em}
+.section-cat{font-size:12px;font-weight:700;color:var(--accent);letter-spacing:.09em}
+.section-header{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:24px;
+  padding-bottom:28px;border-bottom:1px solid var(--border);margin-bottom:48px;
+}
+.section-header h2{font-size:clamp(26px,3.2vw,40px);font-weight:700;max-width:540px}
+.section-link{font-size:12px;font-weight:700;color:var(--accent);letter-spacing:.08em;white-space:nowrap;text-decoration:underline;text-underline-offset:4px;transition:opacity .15s;flex-shrink:0}
+.section-link:hover{opacity:.65}
 
 /* ===== HERO ===== */
-.hero{
-  background:var(--navy);color:#fff;
-  padding:140px 0 100px;
-  position:relative;overflow:hidden;
-}
-.hero::before{
-  content:'';position:absolute;inset:0;
-  background-image:
-    linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
-  background-size:48px 48px;
-  -webkit-mask-image:radial-gradient(ellipse at center,#000 40%,transparent 75%);
-  mask-image:radial-gradient(ellipse at center,#000 40%,transparent 75%);
-}
-.hero::after{
-  content:'';position:absolute;
-  top:-20%;right:-10%;width:700px;height:700px;
-  background:radial-gradient(circle,rgba(26,111,212,.35),transparent 70%);
-  pointer-events:none;
-}
-.hero-grid{
-  display:grid;grid-template-columns:1.1fr .9fr;gap:60px;
-  align-items:center;position:relative;z-index:1;
-}
-.eyebrow{
-  display:inline-block;
-  padding:6px 14px;border-radius:999px;
-  background:rgba(0,212,170,.12);
-  color:var(--teal);
-  font-size:12px;font-weight:600;
-  letter-spacing:.08em;
-  margin-bottom:24px;
-  border:1px solid rgba(0,212,170,.25);
-}
+.hero{min-height:100vh;display:flex;align-items:center;padding:120px 0 80px;background:var(--bg)}
+.hero-grid{display:grid;grid-template-columns:1fr 260px;gap:72px;align-items:center}
+.hero-eyebrow{font-size:12px;font-weight:700;letter-spacing:.09em;color:var(--accent);display:block;margin-bottom:22px}
 .hero h1{
-  font-size:clamp(36px,5vw,60px);
-  color:#fff;margin-bottom:20px;
+  font-size:clamp(46px,5.8vw,78px);font-weight:700;
+  line-height:1.0;letter-spacing:-.035em;margin-bottom:26px;
 }
-.hero h1 .accent{
-  background:linear-gradient(90deg,var(--teal),#4de3bf);
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-.hero-sub{
-  font-size:18px;color:rgba(255,255,255,.72);
-  margin-bottom:32px;max-width:560px;
-}
-.hero-cta{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
-.hero-meta{font-size:13px;color:rgba(255,255,255,.5)}
+.hero h1 em{font-style:italic;font-weight:400;color:var(--accent)}
+.hero-sub{font-size:17px;line-height:1.65;color:var(--fg2);max-width:460px;margin-bottom:36px}
+.hero-cta{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 
-/* PDF mockup */
-.pdf{position:relative;display:flex;justify-content:center}
-.pdf-cover{
-  width:min(320px,80%);aspect-ratio:3/4;
-  background:linear-gradient(135deg,#1A6FD4 0%,#0D1B2A 100%);
-  border-radius:14px;
-  padding:32px;
-  box-shadow:
-    0 40px 80px -20px rgba(0,0,0,.6),
-    0 0 0 1px rgba(255,255,255,.08);
-  display:flex;flex-direction:column;justify-content:space-between;
-  transform:rotate(-3deg);
-  transition:transform .5s ease;
-  position:relative;overflow:hidden;
+.hero-stats{
+  display:flex;flex-direction:column;
+  border:1px solid var(--border);border-radius:18px;
+  background:var(--surface);overflow:hidden;
 }
-.pdf-cover:hover{transform:rotate(0deg) translateY(-6px)}
-.pdf-cover::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(circle at 25% 15%,rgba(0,212,170,.3),transparent 55%);
-}
-.pdf-cover::after{
-  content:'';position:absolute;top:0;bottom:0;left:28px;width:1px;
-  background:rgba(255,255,255,.08);
-}
-.pdf-tag{
-  font-size:11px;font-weight:600;letter-spacing:.14em;
-  color:var(--teal);position:relative;
-}
-.pdf-title{
-  font-family:'Space Grotesk',sans-serif;
-  font-weight:700;font-size:30px;line-height:1.1;
-  color:#fff;position:relative;
-}
-.pdf-title small{display:block;font-size:13px;color:rgba(255,255,255,.5);font-weight:500;margin-top:10px;letter-spacing:0}
-.pdf-footer{
-  display:flex;align-items:center;gap:8px;
-  font-size:12px;color:rgba(255,255,255,.6);position:relative;
-}
-.pdf-dot{width:6px;height:6px;background:var(--teal);border-radius:50%;box-shadow:0 0 12px var(--teal)}
-
-/* ===== PROOF BAR ===== */
-.proof{
-  background:var(--gray);padding:28px 0;
-  border-bottom:1px solid var(--border);
-}
-.proof-inner{
-  display:flex;flex-wrap:wrap;align-items:center;
-  justify-content:center;gap:16px 40px;
-}
-.proof-label{
-  font-size:13px;font-weight:600;color:var(--muted);
-  letter-spacing:.08em;text-transform:uppercase;
-}
-.proof-item{
-  display:flex;align-items:center;gap:8px;
-  font-size:14px;color:var(--ink);font-weight:500;
-}
-.proof-check{
-  width:20px;height:20px;border-radius:50%;
-  background:var(--teal);color:var(--navy);
-  display:grid;place-items:center;flex-shrink:0;
-}
-.proof-check svg{width:12px;height:12px}
-
-/* ===== SECTIONS ===== */
-.section{padding:100px 0}
-.section-head{text-align:center;max-width:640px;margin:0 auto 56px}
-.section-head h2{font-size:clamp(32px,4vw,44px);margin-bottom:16px}
-.section-head p{color:var(--muted);font-size:18px}
+.stat{padding:26px 22px}
+.stat+.stat{border-top:1px solid var(--border)}
+.stat-num{font-size:34px;font-weight:700;color:var(--fg1);letter-spacing:-.04em;line-height:1;margin-bottom:5px}
+.stat-label{font-size:10px;font-weight:700;letter-spacing:.09em;color:var(--muted)}
 
 /* ===== BENEFITS ===== */
-.benefits{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
-.card{
-  background:var(--paper);
-  border:1px solid var(--border);
-  border-radius:18px;
-  padding:32px;
-  transition:all .3s ease;
+.cards-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:1px;background:var(--border);
+  border:1px solid var(--border);border-radius:18px;overflow:hidden;
 }
-.card:hover{
-  transform:translateY(-4px);
-  box-shadow:0 24px 48px -24px rgba(13,27,42,.15);
-  border-color:rgba(26,111,212,.2);
-}
-.card-icon{
-  width:52px;height:52px;border-radius:14px;
-  background:linear-gradient(135deg,rgba(26,111,212,.12),rgba(0,212,170,.12));
-  color:var(--blue);
-  display:grid;place-items:center;margin-bottom:22px;
-}
-.card-icon svg{width:26px;height:26px}
-.card h3{font-size:20px;margin-bottom:10px}
-.card p{color:var(--muted);font-size:15px}
+.card{background:var(--surface);padding:36px 30px;transition:background .2s}
+.card:hover{background:var(--bg)}
+.card-tag{font-size:10px;font-weight:700;letter-spacing:.09em;color:var(--accent);margin-bottom:14px}
+.card h3{font-size:21px;font-weight:700;margin-bottom:10px;letter-spacing:-.02em}
+.card p{font-size:15px;color:var(--fg2);line-height:1.65}
 
 /* ===== LEAD MAGNET ===== */
-.magnet{background:var(--navy);color:#fff;position:relative;overflow:hidden}
-.magnet::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse at top right,rgba(0,212,170,.15),transparent 60%);
-  pointer-events:none;
-}
-.magnet::after{
-  content:'';position:absolute;inset:0;
-  background-image:
-    linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
-  background-size:56px 56px;
-  -webkit-mask-image:radial-gradient(ellipse at center,#000 30%,transparent 80%);
-  mask-image:radial-gradient(ellipse at center,#000 30%,transparent 80%);
-}
-.magnet .section-head h2{color:#fff}
-.magnet .section-head p{color:rgba(255,255,255,.7)}
+.magnet-section{background:var(--inverse)}
+.magnet-section .section-cat{color:#9B80FF}
+.magnet-section .section-num{color:rgba(255,255,255,.3)}
+.magnet-section .section-header{border-bottom-color:rgba(255,255,255,.1)}
+.magnet-section h2{color:#fff}
+.magnet-section .section-link{color:#9B80FF}
+
 .magnet-list{
-  max-width:640px;margin:0 auto;
-  display:grid;gap:14px;position:relative;z-index:1;
+  display:flex;flex-direction:column;
+  border:1px solid rgba(255,255,255,.1);border-radius:18px;overflow:hidden;
+  margin-bottom:40px;
 }
 .magnet-item{
-  display:flex;align-items:flex-start;gap:14px;
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:14px;padding:18px 22px;
-  transition:all .25s;
+  display:flex;align-items:center;gap:22px;
+  padding:22px 28px;border-bottom:1px solid rgba(255,255,255,.07);
+  transition:background .2s;
 }
-.magnet-item:hover{background:rgba(255,255,255,.07);border-color:rgba(0,212,170,.3);transform:translateX(4px)}
-.magnet-check{
-  width:24px;height:24px;border-radius:50%;
-  background:var(--teal);color:var(--navy);
-  display:grid;place-items:center;flex-shrink:0;margin-top:2px;
-}
-.magnet-check svg{width:14px;height:14px}
-.magnet-item strong{color:var(--teal);font-weight:600;display:block;margin-bottom:2px;font-family:'Space Grotesk',sans-serif;font-size:15px}
-.magnet-item span{color:rgba(255,255,255,.7);font-size:14px}
-.magnet-cta{text-align:center;margin-top:40px;position:relative;z-index:1}
+.magnet-item:last-child{border-bottom:0}
+.magnet-item:hover{background:rgba(255,255,255,.04)}
+.magnet-num{font-size:20px;font-weight:700;color:rgba(255,255,255,.18);letter-spacing:-.03em;width:32px;flex-shrink:0}
+.magnet-item strong{font-size:16px;font-weight:600;color:#fff;display:block;margin-bottom:2px}
+.magnet-item span{font-size:14px;color:rgba(255,255,255,.45)}
 
 /* ===== FORM ===== */
-.form-section{background:var(--gray)}
+.form-section{background:var(--bg)}
+.form-section-head{text-align:center;margin-bottom:40px}
+.form-section-head h2{font-size:clamp(26px,3.2vw,40px);font-weight:700;margin-bottom:10px}
+.form-section-head p{font-size:17px;color:var(--fg2)}
 .form-wrap{
-  max-width:520px;margin:0 auto;
-  background:var(--paper);padding:40px;border-radius:22px;
-  box-shadow:0 24px 60px -24px rgba(13,27,42,.12);
-  border:1px solid var(--border);
+  max-width:440px;margin:0 auto;
+  background:var(--surface);padding:40px;border-radius:20px;
+  border:1px solid var(--border);box-shadow:0 8px 40px rgba(10,22,40,.06);
 }
-.form-field{margin-bottom:16px}
-.form-field label{
-  display:block;font-size:13px;font-weight:600;
-  margin-bottom:6px;color:var(--ink);
-}
+.form-field{margin-bottom:14px}
+.form-field label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--fg1)}
 .form-field input{
-  width:100%;padding:14px 16px;
-  border:1px solid var(--border);
-  border-radius:10px;
-  font-size:15px;color:var(--ink);
-  background:var(--gray);
-  transition:all .2s;
+  width:100%;padding:13px 16px;
+  border:1.5px solid var(--border);border-radius:10px;
+  font-size:15px;color:var(--fg1);background:var(--bg);
+  transition:all .2s;outline:none;
 }
-.form-field input:focus{
-  outline:0;border-color:var(--blue);
-  background:var(--paper);
-  box-shadow:0 0 0 3px rgba(26,111,212,.12);
-}
+.form-field input:focus{border-color:var(--accent);background:var(--surface);box-shadow:0 0 0 3px rgba(91,43,224,.10)}
+.form-field input::placeholder{color:var(--muted)}
 .form-wrap .btn{width:100%;justify-content:center;margin-top:8px}
-.form-note{text-align:center;margin-top:16px;font-size:13px;color:var(--muted)}
+.form-note{text-align:center;margin-top:14px;font-size:13px;color:var(--muted)}
 .form-success{
-  display:none;text-align:center;padding:24px;
-  background:rgba(0,212,170,.1);border:1px solid rgba(0,212,170,.3);
-  color:var(--navy);border-radius:14px;font-weight:600;
+  display:none;text-align:center;padding:28px;
+  background:rgba(91,43,224,.06);border:1px solid rgba(91,43,224,.2);
+  color:var(--fg1);border-radius:14px;font-weight:600;
   animation:pop .4s ease;
 }
 .form-success.show{display:block}
 .form-success-icon{
-  width:44px;height:44px;border-radius:50%;background:var(--teal);color:var(--navy);
+  width:44px;height:44px;border-radius:50%;
+  background:var(--accent);color:#fff;
   display:grid;place-items:center;margin:0 auto 12px;
 }
 @keyframes pop{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:none}}
 
 /* ===== ABOUT ===== */
-.about-grid{display:grid;grid-template-columns:200px 1fr;gap:48px;align-items:start;max-width:900px;margin:0 auto}
+.about-section{background:var(--surface)}
+.about-grid{display:grid;grid-template-columns:152px 1fr;gap:52px;align-items:start;max-width:860px;margin:0 auto}
 .avatar{
-  width:160px;height:160px;border-radius:50%;
-  background:linear-gradient(135deg,var(--navy),var(--blue));
-  color:#fff;display:grid;place-items:center;
-  font-family:'Space Grotesk',sans-serif;
-  font-weight:700;font-size:58px;letter-spacing:-.02em;
-  box-shadow:0 24px 48px -24px rgba(13,27,42,.35);
-  position:relative;
+  width:152px;height:152px;border-radius:16px;
+  background:var(--accent);color:#fff;
+  display:grid;place-items:center;
+  font-size:30px;font-weight:700;letter-spacing:-.03em;flex-shrink:0;
 }
-.avatar::after{
-  content:'';position:absolute;inset:-4px;border-radius:50%;
-  background:linear-gradient(135deg,var(--teal),transparent 60%);
-  z-index:-1;opacity:.3;filter:blur(12px);
-}
-.about h2{font-size:32px;margin-bottom:6px}
-.about-role{color:var(--blue);font-weight:600;margin-bottom:20px;font-size:15px}
-.about p{color:var(--muted);margin-bottom:24px;font-size:16px}
-.about-links{display:flex;flex-wrap:wrap;gap:12px}
+.about h2{font-size:30px;font-weight:700;margin-bottom:4px}
+.about-role{font-size:13px;color:var(--muted);font-weight:500;margin-bottom:18px;letter-spacing:-.01em}
+.about p{font-size:15px;color:var(--fg2);line-height:1.7;margin-bottom:24px}
+.about-links{display:flex;flex-wrap:wrap;gap:10px}
 .about-link{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:10px 16px;border-radius:10px;
-  background:var(--gray);
-  font-size:14px;font-weight:500;color:var(--ink);
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:13px;font-weight:600;color:var(--link);
+  border:1.5px solid var(--border);border-radius:999px;padding:8px 14px;
   transition:all .2s;
-  border:1px solid var(--border);
 }
-.about-link:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
-.about-link svg{width:16px;height:16px}
+.about-link svg{width:15px;height:15px;flex-shrink:0}
+.about-link:hover{border-color:var(--link);background:rgba(47,99,248,.05)}
 
 /* ===== FOOTER ===== */
-.footer{background:var(--navy);color:rgba(255,255,255,.6);padding:60px 0 40px}
-.footer-grid{
-  display:grid;grid-template-columns:1fr auto;gap:40px;
-  padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,.08);
-  margin-bottom:24px;align-items:start;
+.footer{background:var(--bg);border-top:1px solid var(--border);padding:56px 0 28px}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:48px;align-items:start;margin-bottom:48px}
+.footer-logo{display:flex;align-items:center;gap:8px;font-size:17px;font-weight:700;margin-bottom:8px}
+.footer-logo .logo-mark{width:16px;height:16px;border-radius:3px;background:var(--accent);flex-shrink:0}
+.footer-tag{font-size:14px;color:var(--muted);line-height:1.55;max-width:190px}
+.footer-col h4{font-size:10px;font-weight:700;letter-spacing:.09em;color:var(--muted);margin-bottom:16px}
+.footer-col a{display:block;font-size:14px;font-weight:500;color:var(--fg2);margin-bottom:10px;transition:color .15s}
+.footer-col a:hover{color:var(--fg1)}
+.footer-col a.link-accent{color:var(--accent)}
+.footer-copy{
+  font-size:11px;color:var(--muted);letter-spacing:.04em;
+  border-top:1px solid var(--border-light);padding-top:24px;
+  display:flex;justify-content:space-between;align-items:center;
 }
-.footer-logo{
-  font-family:'Space Grotesk',sans-serif;
-  font-weight:700;font-size:20px;color:#fff;margin-bottom:8px;
-}
-.footer-tag{font-size:14px;max-width:340px;line-height:1.5}
-.footer-links{display:flex;gap:24px;font-size:14px;align-items:center}
-.footer-links a{transition:color .2s}
-.footer-links a:hover{color:var(--teal)}
-.footer-copy{font-size:13px;color:rgba(255,255,255,.4)}
 
 /* ===== ANIMATIONS ===== */
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease}
 .reveal.in{opacity:1;transform:none}
 
 /* ===== MOBILE ===== */
-@media (max-width:860px){
+@media(max-width:860px){
+  .nav{top:12px;left:12px;right:12px;justify-content:stretch}
+  .nav-pill{width:100%;justify-content:space-between;border-radius:16px;padding:10px 10px 10px 18px;position:relative}
+  .hamburger{display:flex}
   .nav-links{
-    position:absolute;top:calc(100% + 8px);left:16px;right:16px;
-    background:#fff;border-radius:14px;
-    flex-direction:column;align-items:stretch;gap:0;
-    padding:12px;
-    box-shadow:0 20px 40px -16px rgba(0,0,0,.2);
-    transform:translateY(-8px);opacity:0;pointer-events:none;
-    transition:all .25s ease;
+    position:absolute;top:calc(100% + 8px);left:0;right:0;
+    flex-direction:column;align-items:stretch;
+    background:rgba(255,255,255,.96);
+    backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+    border:1px solid var(--border);border-radius:16px;
+    padding:8px;gap:2px;
+    opacity:0;pointer-events:none;transform:translateY(-8px);
+    transition:all .2s ease;
   }
-  .nav-links.open{transform:none;opacity:1;pointer-events:auto}
-  .nav-links a.nav-link{color:var(--ink);padding:14px 12px;border-bottom:1px solid var(--border)}
-  .nav-links a.nav-link:last-of-type{border-bottom:0}
-  .nav-links .btn{margin-top:8px;width:100%;justify-content:center}
-  .hamburger{display:grid}
+  .nav-links.open{opacity:1;pointer-events:auto;transform:none}
+  .nav-link{display:block;padding:12px 14px;border-radius:10px;font-size:15px;color:var(--fg1)}
+  .nav-links .btn{width:100%;justify-content:center;border-radius:10px;margin-top:4px}
 
-  .hero{padding:120px 0 80px}
-  .hero-grid{grid-template-columns:1fr;gap:56px}
-  .pdf-cover{transform:rotate(-2deg)}
+  .hero{padding:100px 0 60px;min-height:auto}
+  .hero-grid{grid-template-columns:1fr;gap:40px}
+  .hero h1{font-size:clamp(38px,10vw,54px)}
+  .hero-stats{flex-direction:row}
+  .stat{flex:1;padding:20px 14px}
+  .stat+.stat{border-top:0;border-left:1px solid var(--border)}
+  .stat-num{font-size:22px}
 
-  .section{padding:70px 0}
-  .benefits{grid-template-columns:1fr}
+  .section{padding:64px 0}
+  .section-header{flex-direction:column;align-items:flex-start;gap:8px}
+  .cards-grid{grid-template-columns:1fr}
 
-  .about-grid{grid-template-columns:1fr;gap:24px;text-align:center}
-  .avatar{margin:0 auto}
-  .about-links{justify-content:center}
+  .about-grid{grid-template-columns:1fr;gap:24px}
+  .avatar{width:72px;height:72px;font-size:18px;border-radius:12px}
 
-  .form-wrap{padding:28px 24px}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:28px}
+  .footer-copy{flex-direction:column;gap:6px;text-align:center}
 
-  .footer-grid{grid-template-columns:1fr;text-align:center;gap:24px}
-  .footer-links{justify-content:center;flex-wrap:wrap}
+  .form-wrap{padding:28px 20px}
 }
 </style>
 </head>
@@ -401,17 +273,19 @@ input{font:inherit}
 
 <!-- NAVBAR -->
 <nav class="nav" id="nav">
-  <div class="container nav-inner">
-    <a href="#inicio" class="logo">Alejo Caicedo<span class="logo-dot">.</span></a>
+  <div class="nav-pill">
+    <a href="#inicio" class="logo">
+      <span class="logo-mark"></span>
+      Alejo Caicedo
+    </a>
     <div class="nav-links" id="navLinks">
-      <a href="#inicio" class="nav-link">Inicio</a>
-      <a href="#sobre-mi" class="nav-link">Sobre mí</a>
+      <a href="#beneficios" class="nav-link">Herramientas</a>
       <a href="#guia" class="nav-link">La guía</a>
-      <a href="#contacto" class="nav-link">Contacto</a>
-      <a href="#contacto" class="btn btn-primary">Quiero la guía gratis</a>
+      <a href="#sobre-mi" class="nav-link">Sobre mí</a>
+      <a href="#contacto" class="btn btn-primary btn-sm">Quiero la guía →</a>
     </div>
     <button class="hamburger" id="hamburger" aria-label="Menú">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="20" height="20"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
     </button>
   </div>
 </nav>
@@ -420,59 +294,60 @@ input{font:inherit}
 <section class="hero" id="inicio">
   <div class="container hero-grid">
     <div>
-      <span class="eyebrow reveal">IGLESIA MULTIMEDIA · NEWSLETTER GRATUITO</span>
-      <h1 class="reveal">Tecnología e IA para que tu iglesia <span class="accent">llegue a más personas</span></h1>
+      <span class="hero-eyebrow reveal">TECNOLOGÍA · IA · MINISTERIO</span>
+      <h1 class="reveal">Tecnología e IA<br>para que tu iglesia<br>llegue a más <em>personas</em>.</h1>
       <p class="hero-sub reveal">Cada viernes, herramientas prácticas y tutoriales para pastores, líderes y equipos de comunicación hispanohablantes.</p>
       <div class="hero-cta reveal">
-        <a href="#contacto" class="btn btn-primary btn-lg">Quiero mi guía gratuita →</a>
-        <span class="hero-meta">Únete a cientos de líderes de iglesia. Sin spam. Cancela cuando quieras.</span>
+        <a href="#contacto" class="btn btn-primary btn-lg">Empieza con la guía gratuita →</a>
+        <a href="#guia" class="btn btn-ghost btn-lg">Ver la guía →</a>
       </div>
     </div>
-    <div class="pdf reveal">
-      <div class="pdf-cover">
-        <div class="pdf-tag">GUÍA GRATUITA · PDF</div>
-        <div class="pdf-title">5 Herramientas de IA<small>para tu iglesia</small></div>
-        <div class="pdf-footer"><span class="pdf-dot"></span>Por Alejo Caicedo</div>
+    <div class="hero-stats reveal">
+      <div class="stat">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">GRATUITO</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">5 min</div>
+        <div class="stat-label">LECTURA SEMANAL</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">Cada<br>viernes</div>
+        <div class="stat-label">NUEVO NÚMERO</div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- SOCIAL PROOF -->
-<section class="proof">
-  <div class="container proof-inner">
-    <span class="proof-label">Cada viernes en tu bandeja de entrada</span>
-    <span class="proof-item"><span class="proof-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>100% gratuito</span>
-    <span class="proof-item"><span class="proof-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Sin spam, cancela cuando quieras</span>
-    <span class="proof-item"><span class="proof-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Para iglesias de cualquier tamaño</span>
   </div>
 </section>
 
 <!-- BENEFITS -->
-<section class="section">
+<section class="section" id="beneficios">
   <div class="container">
-    <div class="section-head reveal">
-      <h2>¿Qué encontrarás cada viernes?</h2>
-      <p>Contenido práctico, sin tecnicismos, listo para aplicar en tu ministerio.</p>
+    <div class="section-label">
+      <span class="section-num">01</span>
+      <span class="section-cat">HERRAMIENTAS · RECURSOS</span>
     </div>
-    <div class="benefits">
+    <div class="section-header reveal">
+      <h2>¿Qué encontrarás cada viernes?</h2>
+      <a href="#contacto" class="section-link">SUSCRIBIRME →</a>
+    </div>
+    <div class="cards-grid">
       <div class="card reveal">
-        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5z"/><path d="M19 14l.75 2.25L22 17l-2.25.75L19 20l-.75-2.25L16 17l2.25-.75z"/><path d="M5 4l.5 1.5L7 6l-1.5.5L5 8l-.5-1.5L3 6l1.5-.5z"/></svg></div>
+        <div class="card-tag">IA · HERRAMIENTAS</div>
         <h3>Herramientas de IA</h3>
         <p>Las novedades de inteligencia artificial explicadas en español, con aplicación práctica para el ministerio.</p>
       </div>
       <div class="card reveal">
-        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="3"/><polygon points="10 9 15 12 10 15 10 9" fill="currentColor" stroke="none"/></svg></div>
+        <div class="card-tag">MULTIMEDIA · TUTORIAL</div>
         <h3>Tutoriales prácticos</h3>
         <p>Paso a paso cómo usar YouTube, redes sociales, transmisiones en directo y más para tu iglesia.</p>
       </div>
       <div class="card reveal">
-        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+        <div class="card-tag">RECURSOS · PDF</div>
         <h3>Recursos gratuitos</h3>
         <p>Guías, checklists y plantillas descargables para equipos de comunicación y multimedia.</p>
       </div>
       <div class="card reveal">
-        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 2.5-5 6-5s6 2 6 5"/><circle cx="17" cy="9" r="2.5"/><path d="M14.5 20c0-2 1.5-4 4.5-4s4.5 1.5 4.5 4"/></svg></div>
+        <div class="card-tag">CASOS REALES · IGLESIAS</div>
         <h3>Casos reales</h3>
         <p>Lo que funciona en iglesias reales, no teoría. Aplicable desde el primer día.</p>
       </div>
@@ -481,44 +356,50 @@ input{font:inherit}
 </section>
 
 <!-- LEAD MAGNET -->
-<section class="section magnet" id="guia">
+<section class="section magnet-section" id="guia">
   <div class="container">
-    <div class="section-head reveal">
-      <h2>Empieza hoy con la guía gratuita</h2>
-      <p>5 Herramientas de IA que tu iglesia puede usar esta misma semana</p>
+    <div class="section-label">
+      <span class="section-num">02</span>
+      <span class="section-cat">GUÍA GRATUITA · PDF</span>
+    </div>
+    <div class="section-header reveal">
+      <h2>5 Herramientas de IA que tu iglesia puede usar esta semana</h2>
+      <a href="#contacto" class="section-link">DESCARGAR →</a>
     </div>
     <div class="magnet-list">
       <div class="magnet-item reveal">
-        <span class="magnet-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+        <span class="magnet-num">01</span>
         <div><strong>Claude / ChatGPT</strong><span>Investigación bíblica y revisión de sermones</span></div>
       </div>
       <div class="magnet-item reveal">
-        <span class="magnet-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+        <span class="magnet-num">02</span>
         <div><strong>Canva</strong><span>Diseño con IA para redes sociales</span></div>
       </div>
       <div class="magnet-item reveal">
-        <span class="magnet-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+        <span class="magnet-num">03</span>
         <div><strong>CapCut</strong><span>Edición de vídeo sin experiencia</span></div>
       </div>
       <div class="magnet-item reveal">
-        <span class="magnet-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+        <span class="magnet-num">04</span>
         <div><strong>NotebookLM</strong><span>Estudios bíblicos inteligentes</span></div>
       </div>
       <div class="magnet-item reveal">
-        <span class="magnet-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+        <span class="magnet-num">05</span>
         <div><strong>StreamYard</strong><span>Transmisiones en directo gratis</span></div>
       </div>
     </div>
-    <div class="magnet-cta reveal">
-      <a href="#contacto" class="btn btn-primary btn-lg">Descargar guía gratis →</a>
-    </div>
+    <a href="#contacto" class="btn btn-accent btn-lg reveal">Descargar guía gratis →</a>
   </div>
 </section>
 
 <!-- FORM -->
 <section class="section form-section" id="contacto">
   <div class="container">
-    <div class="section-head reveal">
+    <div class="section-label" style="justify-content:center">
+      <span class="section-num">03</span>
+      <span class="section-cat">NEWSLETTER · GRATUITO</span>
+    </div>
+    <div class="form-section-head reveal">
       <h2>Únete a Iglesia Multimedia</h2>
       <p>Recibe la guía ahora y cada viernes nuevas herramientas para tu ministerio</p>
     </div>
@@ -532,7 +413,7 @@ input{font:inherit}
           <label for="email">Email</label>
           <input type="email" id="email" name="email" placeholder="tu@email.com" required>
         </div>
-        <button type="submit" class="btn btn-primary btn-lg">Quiero mi guía gratuita →</button>
+        <button type="submit" class="btn btn-accent btn-lg">Quiero mi guía gratuita →</button>
         <p class="form-note">Al suscribirte recibirás la guía inmediatamente en tu email.</p>
       </form>
       <div class="form-success" id="formSuccess">
@@ -544,26 +425,32 @@ input{font:inherit}
 </section>
 
 <!-- ABOUT -->
-<section class="section" id="sobre-mi">
-  <div class="container about-grid">
-    <div class="avatar reveal">AC</div>
-    <div class="about reveal">
-      <h2>Alejo Caicedo</h2>
-      <div class="about-role">Responsable de Multimedia · Especialista en Marketing Digital e IA</div>
-      <p>Llevo años gestionando el área de tecnología y multimedia en una iglesia evangélica en Córdoba, España. Soy especialista en marketing digital, IA y automatización bajo mi marca Pulpo Digital. Creo firmemente que la tecnología no reemplaza el ministerio — lo potencia. Aquí comparto todo lo que aprendo para que más iglesias lleguen a más personas con el evangelio.</p>
-      <div class="about-links">
-        <a href="https://youtube.com/@alejocaicedo" target="_blank" rel="noopener" class="about-link">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.3a3 3 0 0 0-2.1-2.1C19 4.7 12 4.7 12 4.7s-7 0-8.9.5A3 3 0 0 0 1 7.3C.5 9.2.5 12 .5 12s0 2.8.5 4.7a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-4.7.5-4.7s0-2.8-.5-4.7zM9.75 15.5v-7l6 3.5-6 3.5z"/></svg>
-          YouTube @alejocaicedo
-        </a>
-        <a href="https://alejocaicedo.substack.com" target="_blank" rel="noopener" class="about-link">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 4H2v3h20V4zM2 9v12l10-5.5L22 21V9H2zm0 13h20v-2H2v2z"/></svg>
-          alejocaicedo.substack.com
-        </a>
-        <a href="mailto:alejo@pulpodigital.es" class="about-link">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2 6 12 13 22 6"/></svg>
-          alejo@pulpodigital.es
-        </a>
+<section class="section about-section" id="sobre-mi">
+  <div class="container">
+    <div class="section-label" style="justify-content:center;margin-bottom:48px">
+      <span class="section-num">04</span>
+      <span class="section-cat">SOBRE MÍ</span>
+    </div>
+    <div class="about-grid">
+      <div class="avatar reveal">AC</div>
+      <div class="about reveal">
+        <h2>Alejo Caicedo</h2>
+        <div class="about-role">Responsable de Multimedia · Especialista en Marketing Digital e IA</div>
+        <p>Llevo años gestionando el área de tecnología y multimedia en una iglesia evangélica en Córdoba, España. Soy especialista en marketing digital, IA y automatización bajo mi marca Pulpo Digital. Creo firmemente que la tecnología no reemplaza el ministerio — lo potencia. Aquí comparto todo lo que aprendo para que más iglesias lleguen a más personas con el evangelio.</p>
+        <div class="about-links">
+          <a href="https://youtube.com/@alejocaicedo" target="_blank" rel="noopener" class="about-link">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M23 7.3a3 3 0 0 0-2.1-2.1C19 4.7 12 4.7 12 4.7s-7 0-8.9.5A3 3 0 0 0 1 7.3C.5 9.2.5 12 .5 12s0 2.8.5 4.7a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-4.7.5-4.7s0-2.8-.5-4.7zM9.75 15.5v-7l6 3.5-6 3.5z"/></svg>
+            YouTube @alejocaicedo
+          </a>
+          <a href="https://alejocaicedo.substack.com" target="_blank" rel="noopener" class="about-link">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M22 4H2v3h20V4zM2 9v12l10-5.5L22 21V9H2zm0 13h20v-2H2v2z"/></svg>
+            alejocaicedo.substack.com
+          </a>
+          <a href="mailto:alejo@pulpodigital.es" class="about-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2 6 12 13 22 6"/></svg>
+            alejo@pulpodigital.es
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -574,26 +461,34 @@ input{font:inherit}
   <div class="container">
     <div class="footer-grid">
       <div>
-        <div class="footer-logo">Alejo Caicedo<span style="color:var(--teal)">.</span></div>
-        <div class="footer-tag">Tecnología e IA para iglesias hispanohablantes</div>
+        <div class="footer-logo"><span class="logo-mark"></span>Alejo Caicedo</div>
+        <div class="footer-tag">Tecnología e IA para iglesias hispanohablantes.</div>
       </div>
-      <div class="footer-links">
+      <div class="footer-col">
+        <h4>APRENDE</h4>
+        <a href="#guia">La guía gratuita</a>
+        <a href="#beneficios">Herramientas</a>
+        <a href="#contacto">Newsletter</a>
+      </div>
+      <div class="footer-col">
+        <h4>CONECTA</h4>
         <a href="https://youtube.com/@alejocaicedo" target="_blank" rel="noopener">YouTube</a>
         <a href="https://alejocaicedo.substack.com" target="_blank" rel="noopener">Substack</a>
-        <a href="mailto:alejo@pulpodigital.es">Email</a>
+      </div>
+      <div class="footer-col">
+        <h4>CONTACTO</h4>
+        <a href="mailto:alejo@pulpodigital.es">alejo@pulpodigital.es</a>
+        <a href="#contacto" class="link-accent">Suscribirme →</a>
       </div>
     </div>
-    <div class="footer-copy">© 2026 Alejo Caicedo · Todos los derechos reservados</div>
+    <div class="footer-copy">
+      <span>© 2026 ALEJO CAICEDO — TODOS LOS DERECHOS RESERVADOS</span>
+      <span>CÓRDOBA · ES</span>
+    </div>
   </div>
 </footer>
 
 <script>
-// Navbar scroll state
-const nav = document.getElementById('nav');
-const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 20);
-window.addEventListener('scroll', onScroll, {passive:true});
-onScroll();
-
 // Mobile menu
 const hamburger = document.getElementById('hamburger');
 const navLinks = document.getElementById('navLinks');
@@ -603,15 +498,12 @@ navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => na
 // Reveal on scroll
 const io = new IntersectionObserver((entries) => {
   entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('in');
-      io.unobserve(e.target);
-    }
+    if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}
   });
-}, {threshold:.12, rootMargin:'0px 0px -40px 0px'});
+},{threshold:.1,rootMargin:'0px 0px -32px 0px'});
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-// Form submit → n8n webhook (envía PDF por email + guarda lead)
+// Form submit → n8n webhook
 const form = document.getElementById('leadForm');
 const success = document.getElementById('formSuccess');
 form.addEventListener('submit', async (e) => {
@@ -619,20 +511,20 @@ form.addEventListener('submit', async (e) => {
   const name = form.name.value.trim();
   const email = form.email.value.trim();
   const emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!name || !emailRx.test(email)) {
+  if(!name || !emailRx.test(email)){
     form.querySelector('input:invalid, input[value=""]').focus();
     return;
   }
   const btn = form.querySelector('button[type="submit"]');
   btn.disabled = true;
   btn.textContent = 'Enviando…';
-  try {
-    await fetch('https://n8n.pulpodigital.es/webhook/iglesia-leads', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({name, email})
+  try{
+    await fetch('https://n8n.pulpodigital.es/webhook/iglesia-leads',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({name,email})
     });
-  } catch (_) {}
+  }catch(_){}
   form.style.display = 'none';
   success.classList.add('show');
 });
