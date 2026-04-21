@@ -611,10 +611,10 @@ const io = new IntersectionObserver((entries) => {
 }, {threshold:.12, rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-// Form submit → redirect to Substack with email prefilled
+// Form submit → n8n webhook (envía PDF por email + guarda lead)
 const form = document.getElementById('leadForm');
 const success = document.getElementById('formSuccess');
-form.addEventListener('submit', (e) => {
+form.addEventListener('submit', async (e) => {
   e.preventDefault();
   const name = form.name.value.trim();
   const email = form.email.value.trim();
@@ -623,8 +623,16 @@ form.addEventListener('submit', (e) => {
     form.querySelector('input:invalid, input[value=""]').focus();
     return;
   }
-  const url = 'https://alejocaicedo.substack.com/subscribe?email=' + encodeURIComponent(email);
-  window.open(url, '_blank', 'noopener');
+  const btn = form.querySelector('button[type="submit"]');
+  btn.disabled = true;
+  btn.textContent = 'Enviando…';
+  try {
+    await fetch('https://n8n.pulpodigital.es/webhook/iglesia-leads', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({name, email})
+    });
+  } catch (_) {}
   form.style.display = 'none';
   success.classList.add('show');
 });
