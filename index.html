@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alejo Caicedo · Iglesia Multimedia</title>
+<meta name="description" content="Tecnología e IA para que tu iglesia llegue a más personas. Newsletter gratuito cada viernes para pastores, líderes y equipos de comunicación.">
+<meta property="og:title" content="Iglesia Multimedia · Alejo Caicedo">
+<meta property="og:description" content="Tecnología e IA para que tu iglesia llegue a más personas.">
+<meta property="og:type" content="website">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+:root{
+  --navy:#0D1B2A;
+  --blue:#1A6FD4;
+  --teal:#00D4AA;
+  --ink:#0A1628;
+  --paper:#FFFFFF;
+  --gray:#F7F8FA;
+  --border:rgba(13,27,42,.08);
+  --muted:#5a6577;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;
+  color:var(--ink);
+  background:var(--paper);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif;letter-spacing:-.02em;line-height:1.1;color:var(--ink)}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:0;background:none}
+input{font:inherit}
+
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* ===== NAVBAR ===== */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:18px 0;transition:all .3s ease;
+  background:transparent;
+}
+.nav.scrolled{
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  box-shadow:0 1px 0 var(--border);
+  padding:14px 0;
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:32px;position:relative}
+.logo{
+  font-family:'Space Grotesk',sans-serif;
+  font-weight:700;font-size:18px;letter-spacing:-.02em;
+  color:#fff;transition:color .3s;
+}
+.logo-dot{color:var(--teal)}
+.nav.scrolled .logo{color:var(--ink)}
+.nav-links{display:flex;gap:32px;align-items:center}
+.nav-links a.nav-link{
+  color:rgba(255,255,255,.85);font-size:15px;font-weight:500;
+  transition:color .2s;
+}
+.nav-links a.nav-link:hover{color:#fff}
+.nav.scrolled .nav-links a.nav-link{color:var(--muted)}
+.nav.scrolled .nav-links a.nav-link:hover{color:var(--ink)}
+
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 20px;border-radius:10px;
+  font-weight:600;font-size:14px;
+  transition:all .2s;white-space:nowrap;
+  font-family:inherit;
+}
+.btn-primary{background:var(--teal);color:var(--navy)}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 10px 28px rgba(0,212,170,.4)}
+.btn-lg{padding:16px 28px;font-size:16px;border-radius:12px}
+
+.hamburger{display:none;width:40px;height:40px;align-items:center;justify-content:center;color:#fff}
+.nav.scrolled .hamburger{color:var(--ink)}
+.hamburger svg{width:24px;height:24px}
+
+/* ===== HERO ===== */
+.hero{
+  background:var(--navy);color:#fff;
+  padding:140px 0 100px;
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+  background-size:48px 48px;
+  -webkit-mask-image:radial-gradient(ellipse at center,#000 40%,transparent 75%);
+  mask-image:radial-gradient(ellipse at center,#000 40%,transparent 75%);
+}
+.hero::after{
+  content:'';position:absolute;
+  top:-20%;right:-10%;width:700px;height:700px;
+  background:radial-gradient(circle,rgba(26,111,212,.35),transparent 70%);
+  pointer-events:none;
+}
+.hero-grid{
+  display:grid;grid-template-columns:1.1fr .9fr;gap:60px;
+  align-items:center;position:relative;z-index:1;
+}
+.eyebrow{
+  display:inline-block;
+  padding:6px 14px;border-radius:999px;
+  background:rgba(0,212,170,.12);
+  color:var(--teal);
+  font-size:12px;font-weight:600;
+  letter-spacing:.08em;
+  margin-bottom:24px;
+  border:1px solid rgba(0,212,170,.25);
+}
+.hero h1{
+  font-size:clamp(36px,5vw,60px);
+  color:#fff;margin-bottom:20px;
+}
+.hero h1 .accent{
+  background:linear-gradient(90deg,var(--teal),#4de3bf);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.hero-sub{
+  font-size:18px;color:rgba(255,255,255,.72);
+  margin-bottom:32px;max-width:560px;
+}
+.hero-cta{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.hero-meta{font-size:13px;color:rgba(255,255,255,.5)}
+
+/* PDF mockup */
+.pdf{position:relative;display:flex;justify-content:center}
+.pdf-cover{
+  width:min(320px,80%);aspect-ratio:3/4;
+  background:linear-gradient(135deg,#1A6FD4 0%,#0D1B2A 100%);
+  border-radius:14px;
+  padding:32px;
+  box-shadow:
+    0 40px 80px -20px rgba(0,0,0,.6),
+    0 0 0 1px rgba(255,255,255,.08);
+  display:flex;flex-direction:column;justify-content:space-between;
+  transform:rotate(-3deg);
+  transition:transform .5s ease;
+  position:relative;overflow:hidden;
+}
+.pdf-cover:hover{transform:rotate(0deg) translateY(-6px)}
+.pdf-cover::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 25% 15%,rgba(0,212,170,.3),transparent 55%);
+}
+.pdf-cover::after{
+  content:'';position:absolute;top:0;bottom:0;left:28px;width:1px;
+  background:rgba(255,255,255,.08);
+}
+.pdf-tag{
+  font-size:11px;font-weight:600;letter-spacing:.14em;
+  color:var(--teal);position:relative;
+}
+.pdf-title{
+  font-family:'Space Grotesk',sans-serif;
+  font-weight:700;font-size:30px;line-height:1.1;
+  color:#fff;position:relative;
+}
+.pdf-title small{display:block;font-size:13px;color:rgba(255,255,255,.5);font-weight:500;margin-top:10px;letter-spacing:0}
+.pdf-footer{
+  display:flex;align-items:center;gap:8px;
+  font-size:12px;color:rgba(255,255,255,.6);position:relative;
+}
+.pdf-dot{width:6px;height:6px;background:var(--teal);border-radius:50%;box-shadow:0 0 12px var(--teal)}
+
+/* ===== PROOF BAR ===== */
+.proof{
+  background:var(--gray);padding:28px 0;
+  border-bottom:1px solid var(--border);
+}
+.proof-inner{
+  display:flex;flex-wrap:wrap;align-items:center;
+  justify-content:center;gap:16px 40px;
+}
+.proof-label{
+  font-size:13px;font-weight:600;color:var(--muted);
+  letter-spacing:.08em;text-transform:uppercase;
+}
+.proof-item{
+  display:flex;align-items:center;gap:8px;
+  font-size:14px;color:var(--ink);font-weight:500;
+}
+.proof-check{
+  width:20px;height:20px;border-radius:50%;
+  background:var(--teal);color:var(--navy);
+  display:grid;place-items:center;flex-shrink:0;
+}
+.proof-check svg{width:12px;height:12px}
+
+/* ===== SECTIONS ===== */
+.section{padding:100px 0}
+.section-head{text-align:center;max-width:640px;margin:0 auto 56px}
+.section-head h2{font-size:clamp(32px,4vw,44px);margin-bottom:16px}
+.section-head p{color:var(--muted);font-size:18px}
+
+/* ===== BENEFITS ===== */
+.benefits{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.card{
+  background:var(--paper);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:32px;
+  transition:all .3s ease;
+}
+.card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 24px 48px -24px rgba(13,27,42,.15);
+  border-color:rgba(26,111,212,.2);
+}
+.card-icon{
+  width:52px;height:52px;border-radius:14px;
+  background:linear-gradient(135deg,rgba(26,111,212,.12),rgba(0,212,170,.12));
+  color:var(--blue);
+  display:grid;place-items:center;margin-bottom:22px;
+}
+.card-icon svg{width:26px;height:26px}
+.card h3{font-size:20px;margin-bottom:10px}
+.card p{color:var(--muted);font-size:15px}
+
+/* ===== LEAD MAGNET ===== */
+.magnet{background:var(--navy);color:#fff;position:relative;overflow:hidden}
+.magnet::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at top right,rgba(0,212,170,.15),transparent 60%);
+  pointer-events:none;
+}
+.magnet::after{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+  background-size:56px 56px;
+  -webkit-mask-image:radial-gradient(ellipse at center,#000 30%,transparent 80%);
+  mask-image:radial-gradient(ellipse at center,#000 30%,transparent 80%);
+}
+.magnet .section-head h2{color:#fff}
+.magnet .section-head p{color:rgba(255,255,255,.7)}
+.magnet-list{
+  max-width:640px;margin:0 auto;
+  display:grid;gap:14px;position:relative;z-index:1;
+}
+.magnet-item{
+  display:flex;align-items:flex-start;gap:14px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;padding:18px 22px;
+  transition:all .25s;
+}
+.magnet-item:hover{background:rgba(255,255,255,.07);border-color:rgba(0,212,170,.3);transform:translateX(4px)}
+.magnet-check{
+  width:24px;height:24px;border-radius:50%;
+  background:var(--teal);color:var(--navy);
+  display:grid;place-items:center;flex-shrink:0;margin-top:2px;
+}
+.magnet-check svg{width:14px;height:14px}
+.magnet-item strong{color:var(--teal);font-weight:600;display:block;margin-bottom:2px;font-family:'Space Grotesk',sans-serif;font-size:15px}
+.magnet-item span{color:rgba(255,255,255,.7);font-size:14px}
+.magnet-cta{text-align:center;margin-top:40px;position:relative;z-index:1}
+
+/* ===== FORM ===== */
+.form-section{background:var(--gray)}
+.form-wrap{
+  max-width:520px;margin:0 auto;
+  background:var(--paper);padding:40px;border-radius:22px;
+  box-shadow:0 24px 60px -24px rgba(13,27,42,.12);
+  border:1px solid var(--border);
+}
+.form-field{margin-bottom:16px}
+.form-field label{
+  display:block;font-size:13px;font-weight:600;
+  margin-bottom:6px;color:var(--ink);
+}
+.form-field input{
+  width:100%;padding:14px 16px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  font-size:15px;color:var(--ink);
+  background:var(--gray);
+  transition:all .2s;
+}
+.form-field input:focus{
+  outline:0;border-color:var(--blue);
+  background:var(--paper);
+  box-shadow:0 0 0 3px rgba(26,111,212,.12);
+}
+.form-wrap .btn{width:100%;justify-content:center;margin-top:8px}
+.form-note{text-align:center;margin-top:16px;font-size:13px;color:var(--muted)}
+.form-success{
+  display:none;text-align:center;padding:24px;
+  background:rgba(0,212,170,.1);border:1px solid rgba(0,212,170,.3);
+  color:var(--navy);border-radius:14px;font-weight:600;
+  animation:pop .4s ease;
+}
+.form-success.show{display:block}
+.form-success-icon{
+  width:44px;height:44px;border-radius:50%;background:var(--teal);color:var(--navy);
+  display:grid;place-items:center;margin:0 auto 12px;
+}
+@keyframes pop{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:none}}
+
+/* ===== ABOUT ===== */
+.about-grid{display:grid;grid-template-columns:200px 1fr;gap:48px;align-items:start;max-width:900px;margin:0 auto}
+.avatar{
+  width:160px;height:160px;border-radius:50%;
+  background:linear-gradient(135deg,var(--navy),var(--blue));
+  color:#fff;display:grid;place-items:center;
+  font-family:'Space Grotesk',sans-serif;
+  font-weight:700;font-size:58px;letter-spacing:-.02em;
+  box-shadow:0 24px 48px -24px rgba(13,27,42,.35);
+  position:relative;
+}
+.avatar::after{
+  content:'';position:absolute;inset:-4px;border-radius:50%;
+  background:linear-gradient(135deg,var(--teal),transparent 60%);
+  z-index:-1;opacity:.3;filter:blur(12px);
+}
+.about h2{font-size:32px;margin-bottom:6px}
+.about-role{color:var(--blue);font-weight:600;margin-bottom:20px;font-size:15px}
+.about p{color:var(--muted);margin-bottom:24px;font-size:16px}
+.about-links{display:flex;flex-wrap:wrap;gap:12px}
+.about-link{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 16px;border-radius:10px;
+  background:var(--gray);
+  font-size:14px;font-weight:500;color:var(--ink);
+  transition:all .2s;
+  border:1px solid var(--border);
+}
+.about-link:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.about-link svg{width:16px;height:16px}
+
+/* ===== FOOTER ===== */
+.footer{background:var(--navy);color:rgba(255,255,255,.6);padding:60px 0 40px}
+.footer-grid{
+  display:grid;grid-template-columns:1fr auto;gap:40px;
+  padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,.08);
+  margin-bottom:24px;align-items:start;
+}
+.footer-logo{
+  font-family:'Space Grotesk',sans-serif;
+  font-weight:700;font-size:20px;color:#fff;margin-bottom:8px;
+}
+.footer-tag{font-size:14px;max-width:340px;line-height:1.5}
+.footer-links{display:flex;gap:24px;font-size:14px;align-items:center}
+.footer-links a{transition:color .2s}
+.footer-links a:hover{color:var(--teal)}
+.footer-copy{font-size:13px;color:rgba(255,255,255,.4)}
+
+/* ===== ANIMATIONS ===== */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* ===== MOBILE ===== */
+@media (max-width:860px){
+  .nav-links{
+    position:absolute;top:calc(100% + 8px);left:16px;right:16px;
+    background:#fff;border-radius:14px;
+    flex-direction:column;align-items:stretch;gap:0;
+    padding:12px;
+    box-shadow:0 20px 40px -16px rgba(0,0,0,.2);
+    transform:translateY(-8px);opacity:0;pointer-events:none;
+    transition:all .25s ease;
+  }
+  .nav-links.open{transform:none;opacity:1;pointer-events:auto}
+  .nav-links a.nav-link{color:var(--ink);padding:14px 12px;border-bottom:1px solid var(--border)}
+  .nav-links a.nav-link:last-of-type{border-bottom:0}
+  .nav-links .btn{margin-top:8px;width:100%;justify-content:center}
+  .hamburger{display:grid}
+
+  .hero{padding:120px 0 80px}
+  .hero-grid{grid-template-columns:1fr;gap:56px}
+  .pdf-cover{transform:rotate(-2deg)}
+
+  .section{padding:70px 0}
+  .benefits{grid-template-columns:1fr}
+
+  .about-grid{grid-template-columns:1fr;gap:24px;text-align:center}
+  .avatar{margin:0 auto}
+  .about-links{justify-content:center}
+
+  .form-wrap{padding:28px 24px}
+
+  .footer-grid{grid-template-columns:1fr;text-align:center;gap:24px}
+  .footer-links{justify-content:center;flex-wrap:wrap}
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="#inicio" class="logo">Alejo Caicedo<span class="logo-dot">.</span></a>
+    <div class="nav-links" id="navLinks">
+      <a href="#inicio" class="nav-link">Inicio</a>
+      <a href="#sobre-mi" class="nav-link">Sobre mí</a>
+      <a href="#guia" class="nav-link">La guía</a>
+      <a href="#contacto" class="nav-link">Contacto</a>
+      <a href="#contacto" class="btn btn-primary">Quiero la guía gratis</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menú">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow reveal">IGLESIA MULTIMEDIA · NEWSLETTER GRATUITO</span>
+      <h1 class="reveal">Tecnología e IA para que tu iglesia <span class="accent">llegue a más personas</span></h1>
+      <p class="hero-sub reveal">Cada viernes, herramientas prácticas y tutoriales para pastores, líderes y equipos de comunicación hispanohablantes.</p>
+      <div class="hero-cta reveal">
+        <a href="#contacto" class="btn btn-primary btn-lg">Quiero mi guía gratuita →</a>
+        <span class="hero-meta">Únete a cientos de líderes de iglesia. Sin spam. Cancela cuando quieras.</span>
+      </div>
+    </div>
+    <div class="pdf reveal">
+      <div class="pdf-cover">
+        <div class="pdf-tag">GUÍA GRATUITA · PDF</div>
+        <div class="pdf-title">5 Herramientas de IA<small>para tu iglesia</small></div>
+        <div class="pdf-footer"><span class="pdf-dot"></span>Por Alejo Caicedo</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section class="proof">
+  <div class="container proof-inner">
+    <span class="proof-label">Cada viernes en tu bandeja de entrada</span>
+    <span class="proof-item"><span class="proof-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>100% gratuito</span>
+    <span class="proof-item"><span class="proof-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Sin spam, cancela cuando quieras</span>
+    <span class="proof-item"><span class="proof-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Para iglesias de cualquier tamaño</span>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>¿Qué encontrarás cada viernes?</h2>
+      <p>Contenido práctico, sin tecnicismos, listo para aplicar en tu ministerio.</p>
+    </div>
+    <div class="benefits">
+      <div class="card reveal">
+        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5z"/><path d="M19 14l.75 2.25L22 17l-2.25.75L19 20l-.75-2.25L16 17l2.25-.75z"/><path d="M5 4l.5 1.5L7 6l-1.5.5L5 8l-.5-1.5L3 6l1.5-.5z"/></svg></div>
+        <h3>Herramientas de IA</h3>
+        <p>Las novedades de inteligencia artificial explicadas en español, con aplicación práctica para el ministerio.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="3"/><polygon points="10 9 15 12 10 15 10 9" fill="currentColor" stroke="none"/></svg></div>
+        <h3>Tutoriales prácticos</h3>
+        <p>Paso a paso cómo usar YouTube, redes sociales, transmisiones en directo y más para tu iglesia.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+        <h3>Recursos gratuitos</h3>
+        <p>Guías, checklists y plantillas descargables para equipos de comunicación y multimedia.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 2.5-5 6-5s6 2 6 5"/><circle cx="17" cy="9" r="2.5"/><path d="M14.5 20c0-2 1.5-4 4.5-4s4.5 1.5 4.5 4"/></svg></div>
+        <h3>Casos reales</h3>
+        <p>Lo que funciona en iglesias reales, no teoría. Aplicable desde el primer día.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEAD MAGNET -->
+<section class="section magnet" id="guia">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>Empieza hoy con la guía gratuita</h2>
+      <p>5 Herramientas de IA que tu iglesia puede usar esta misma semana</p>
+    </div>
+    <div class="magnet-list">
+      <div class="magnet-item reveal">
+        <span class="magnet-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+        <div><strong>Claude / ChatGPT</strong><span>Investigación bíblica y revisión de sermones</span></div>
+      </div>
+      <div class="magnet-item reveal">
+        <span class="magnet-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+        <div><strong>Canva</strong><span>Diseño con IA para redes sociales</span></div>
+      </div>
+      <div class="magnet-item reveal">
+        <span class="magnet-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+        <div><strong>CapCut</strong><span>Edición de vídeo sin experiencia</span></div>
+      </div>
+      <div class="magnet-item reveal">
+        <span class="magnet-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+        <div><strong>NotebookLM</strong><span>Estudios bíblicos inteligentes</span></div>
+      </div>
+      <div class="magnet-item reveal">
+        <span class="magnet-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+        <div><strong>StreamYard</strong><span>Transmisiones en directo gratis</span></div>
+      </div>
+    </div>
+    <div class="magnet-cta reveal">
+      <a href="#contacto" class="btn btn-primary btn-lg">Descargar guía gratis →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FORM -->
+<section class="section form-section" id="contacto">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>Únete a Iglesia Multimedia</h2>
+      <p>Recibe la guía ahora y cada viernes nuevas herramientas para tu ministerio</p>
+    </div>
+    <div class="form-wrap reveal">
+      <form id="leadForm" novalidate>
+        <div class="form-field">
+          <label for="name">Nombre</label>
+          <input type="text" id="name" name="name" placeholder="Tu nombre" required>
+        </div>
+        <div class="form-field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg">Quiero mi guía gratuita →</button>
+        <p class="form-note">Al suscribirte recibirás la guía inmediatamente en tu email.</p>
+      </form>
+      <div class="form-success" id="formSuccess">
+        <div class="form-success-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        ¡Listo! Revisa tu bandeja de entrada en los próximos minutos.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="sobre-mi">
+  <div class="container about-grid">
+    <div class="avatar reveal">AC</div>
+    <div class="about reveal">
+      <h2>Alejo Caicedo</h2>
+      <div class="about-role">Responsable de Multimedia · Especialista en Marketing Digital e IA</div>
+      <p>Llevo años gestionando el área de tecnología y multimedia en una iglesia evangélica en Córdoba, España. Soy especialista en marketing digital, IA y automatización bajo mi marca Pulpo Digital. Creo firmemente que la tecnología no reemplaza el ministerio — lo potencia. Aquí comparto todo lo que aprendo para que más iglesias lleguen a más personas con el evangelio.</p>
+      <div class="about-links">
+        <a href="https://youtube.com/@alejocaicedo" target="_blank" rel="noopener" class="about-link">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.3a3 3 0 0 0-2.1-2.1C19 4.7 12 4.7 12 4.7s-7 0-8.9.5A3 3 0 0 0 1 7.3C.5 9.2.5 12 .5 12s0 2.8.5 4.7a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-4.7.5-4.7s0-2.8-.5-4.7zM9.75 15.5v-7l6 3.5-6 3.5z"/></svg>
+          YouTube @alejocaicedo
+        </a>
+        <a href="https://alejocaicedo.substack.com" target="_blank" rel="noopener" class="about-link">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 4H2v3h20V4zM2 9v12l10-5.5L22 21V9H2zm0 13h20v-2H2v2z"/></svg>
+          alejocaicedo.substack.com
+        </a>
+        <a href="mailto:alejo@pulpodigital.es" class="about-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2 6 12 13 22 6"/></svg>
+          alejo@pulpodigital.es
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">Alejo Caicedo<span style="color:var(--teal)">.</span></div>
+        <div class="footer-tag">Tecnología e IA para iglesias hispanohablantes</div>
+      </div>
+      <div class="footer-links">
+        <a href="https://youtube.com/@alejocaicedo" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://alejocaicedo.substack.com" target="_blank" rel="noopener">Substack</a>
+        <a href="mailto:alejo@pulpodigital.es">Email</a>
+      </div>
+    </div>
+    <div class="footer-copy">© 2026 Alejo Caicedo · Todos los derechos reservados</div>
+  </div>
+</footer>
+
+<script>
+// Navbar scroll state
+const nav = document.getElementById('nav');
+const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 20);
+window.addEventListener('scroll', onScroll, {passive:true});
+onScroll();
+
+// Mobile menu
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
+hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+// Reveal on scroll
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    }
+  });
+}, {threshold:.12, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// Form submit → redirect to Substack with email prefilled
+const form = document.getElementById('leadForm');
+const success = document.getElementById('formSuccess');
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const name = form.name.value.trim();
+  const email = form.email.value.trim();
+  const emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!name || !emailRx.test(email)) {
+    form.querySelector('input:invalid, input[value=""]').focus();
+    return;
+  }
+  const url = 'https://alejocaicedo.substack.com/subscribe?email=' + encodeURIComponent(email);
+  window.open(url, '_blank', 'noopener');
+  form.style.display = 'none';
+  success.classList.add('show');
+});
+</script>
+</body>
+</html>
